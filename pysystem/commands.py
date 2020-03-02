@@ -97,3 +97,7 @@ def rm(system, terminal, *args):
         raise pysystem.exceptions.InvalidCommandSyntaxException()
     target_file = get_file_at_path(system.root_folder, terminal.current_folder, args[1])
     target_file.parent.remove_child(target_file)
+
+
+def tree(system, terminal, *args):
+    return terminal.current_folder.get_tree_structure()

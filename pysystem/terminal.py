@@ -18,7 +18,8 @@ class Terminal:
             'ls': commands.ls,
             'echo': commands.echo,
             'rm': commands.rm,
-            'del': commands.rm
+            'del': commands.rm,
+            'tree': commands.tree
         }
 
     def interpret(self):

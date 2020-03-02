@@ -20,6 +20,9 @@ class BaseFile:
             return display_name
         return self.parent.get_path() + display_name
 
+    def get_tree_structure(self, prefix):
+        return self.name + '\n'
+
 
 class File(BaseFile):
     def __init__(self, name, *, contents=""):
@@ -60,3 +63,12 @@ class Folder(BaseFile):
         if file_name in self.child_files:
             return self.child_files[file_name]
         return None
+
+    def get_tree_structure(self, prefix=''):
+        output = self.name + '\n'
+        for i, child_file in enumerate(self.child_files.values()):
+            if i == len(self.child_files) - 1:
+                output += prefix + '└───' + child_file.get_tree_structure(prefix + '    ')
+            else:
+                output += prefix + '├───' + child_file.get_tree_structure(prefix + '│   ')
+        return output
