@@ -14,18 +14,21 @@ class BaseFile:
     def __str__(self) -> str:
         return self.get_path()
 
+    def get_full_name(self):
+        return self.name
+
     def get_path(self, limit=None):
-        display_name = self.name + '/' if type(self) is Folder else self.name
+        display_name = self.get_full_name()
         if self.parent is None or self.parent is limit:
             return display_name
         return self.parent.get_path() + display_name
 
     def get_tree_structure(self, prefix):
-        return self.name + '\n'
+        return self.name + '*\n'
 
 
 class File(BaseFile):
-    def __init__(self, name, *, contents=""):
+    def __init__(self, name, *, contents=''):
         super().__init__(name)
         self.contents = contents
 
@@ -39,6 +42,9 @@ class Folder(BaseFile):
         if child_files is None:
             child_files = {}
         self.child_files = child_files
+
+    def get_full_name(self):
+        return self.name + '/'
 
     def add_child(self, file):
         tmp_name = file.name

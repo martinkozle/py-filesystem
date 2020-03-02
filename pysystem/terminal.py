@@ -19,6 +19,8 @@ class Terminal:
             'echo': commands.echo,
             'rm': commands.rm,
             'del': commands.rm,
+            'mv': commands.mv,
+            'move': commands.mv,
             'tree': commands.tree
         }
 
