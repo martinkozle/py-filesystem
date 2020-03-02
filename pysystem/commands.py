@@ -1,5 +1,6 @@
 import pysystem.exceptions
 import pysystem.file
+import os
 
 
 def get_file_at_path(root_folder, current_folder, target_path):
@@ -97,6 +98,12 @@ def rm(system, terminal, *args):
         raise pysystem.exceptions.InvalidCommandSyntaxException()
     target_file = get_file_at_path(system.root_folder, terminal.current_folder, args[1])
     target_file.parent.remove_child(target_file)
+    return ''
+
+
+def clear(system, terminal, *args):
+    os.system("clear")
+    return ''
 
 def mv(system, terminal, *args):
     new_name = args[2].split('/')[-1]
