@@ -19,7 +19,8 @@ class Terminal:
             'echo': commands.echo,
             'rm': commands.rm,
             'del': commands.rm,
-            'tree': commands.tree
+            'tree': commands.tree,
+            'clear': commands.clear
         }
 
     def interpret(self):
