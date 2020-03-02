@@ -13,7 +13,7 @@ def get_file_at_path(root_folder, current_folder, target_path):
         new_target_folder = root_folder
     for target_path_step in target_path:
         if type(new_target_folder) is not pysystem.file.Folder:
-            raise pysystem.exceptions.InvalidDirectoryName()
+            raise pysystem.exceptions.InvalidDirectoryNameException()
         if target_path in ['.', '']:
             pass
         elif target_path_step == '..':
@@ -39,6 +39,8 @@ def cat(system, terminal, *args):
 
 def _touch(system, terminal, target_path):
     location = get_file_at_path(system.root_folder, terminal.current_folder, '/'.join(target_path.split('/')[:-1]))
+    if type(location) is not pysystem.file.Folder:
+        raise pysystem.exceptions.InvalidDirectoryNameException()
     new_file = pysystem.file.File(target_path.split('/')[-1])
     location.add_child(new_file)
 
@@ -52,6 +54,8 @@ def touch(system, terminal, *args):
 
 def _mkdir(system, terminal, target_path):
     location = get_file_at_path(system.root_folder, terminal.current_folder, '/'.join(target_path.split('/')[:-1]))
+    if type(location) is not pysystem.file.Folder:
+        raise pysystem.exceptions.InvalidDirectoryNameException()
     new_folder = pysystem.file.Folder(target_path.split('/')[-1])
     location.add_child(new_folder)
 
@@ -66,7 +70,10 @@ def mkdir(system, terminal, *args):
 def cd(system, terminal, *args):
     if len(args) < 2:
         raise pysystem.exceptions.InvalidCommandSyntaxException()
-    terminal.current_folder = get_file_at_path(system.root_folder, terminal.current_folder, args[1])
+    new_location = get_file_at_path(system.root_folder, terminal.current_folder, args[1])
+    if type(new_location) is not pysystem.file.Folder:
+        raise pysystem.exceptions.InvalidDirectoryNameException()
+    terminal.current_folder = new_location
     return ""
 
 
