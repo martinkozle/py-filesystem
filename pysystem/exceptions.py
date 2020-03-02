@@ -23,6 +23,6 @@ class InvalidPathException(PySystemException):
         super().__init__('The system cannot find the path specified.')
 
 
-class InvalidDirectoryName(PySystemException):
+class InvalidDirectoryNameException(PySystemException):
     def __init__(self):
         super().__init__('The directory name is invalid.')
