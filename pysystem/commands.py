@@ -105,6 +105,15 @@ def clear(system, terminal, *args):
     os.system("clear")
     return ''
 
+def mv(system, terminal, *args):
+    new_name = args[2].split('/')[-1]
+    source_file = get_file_at_path(system.root_folder, terminal.current_folder, args[1])
+    target_folder = get_file_at_path(system.root_folder, terminal.current_folder, '/'.join(args[2].split('/')[:-1]))
+    source_file.parent.remove_child(source_file)
+    target_folder.add_child(source_file)
+    source_file.name = new_name
+    return ''
+
 
 def tree(system, terminal, *args):
     return terminal.current_folder.get_tree_structure()

@@ -19,8 +19,10 @@ class Terminal:
             'echo': commands.echo,
             'rm': commands.rm,
             'del': commands.rm,
-            'tree': commands.tree,
             'clear': commands.clear
+            'mv': commands.mv,
+            'move': commands.mv,
+            'tree': commands.tree
         }
 
     def interpret(self):
