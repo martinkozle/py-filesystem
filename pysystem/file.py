@@ -57,7 +57,6 @@ class Folder(BaseFile):
         return exceptions.InvalidDirectoryOperationException()
 
     def get_sub_file(self, file_name):
-        for child_file in self.child_files.values():
-            if child_file.name == file_name:
-                return child_file
+        if file_name in self.child_files:
+            return self.child_files[file_name]
         return None
