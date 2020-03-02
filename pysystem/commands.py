@@ -1,6 +1,7 @@
 import pysystem.exceptions
 import pysystem.file
 import os
+import sys
 
 
 def get_file_at_path(root_folder, current_folder, target_path):
@@ -102,8 +103,12 @@ def rm(system, terminal, *args):
 
 
 def clear(system, terminal, *args):
-    os.system("clear")
+    if sys.platform in ['linux', 'aix', 'darwin']:
+        os.system('clear')
+    elif sys.platform in ['win32', 'cygwin']:
+        os.system('cls')
     return ''
+
 
 def mv(system, terminal, *args):
     new_name = args[2].split('/')[-1]
